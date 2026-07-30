@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>33WIN - TRUNG TÂM QUÀ TẶNG</title>
-    <!-- Thư viện Icon FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Thư viện Cloudflare Turnstile -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         * {
             box-sizing: border-box;
@@ -17,8 +14,7 @@
         }
 
         body {
-            background: #4a0000;
-            background: radial-gradient(circle at center, #600000 0%, #300000 70%, #1a0000 100%);
+            background: radial-gradient(circle at center, #6b0909 0%, #3a0000 70%, #200000 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -28,31 +24,30 @@
         }
 
         .logo-container {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: center;
         }
 
-        .logo-img {
-            width: 140px;
+        .logo-container img {
+            max-width: 240px;
             height: auto;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
         }
 
         .card-container {
             background: #ffffff;
             border-radius: 20px;
-            padding: 35px 30px;
+            padding: 35px 30px 30px;
             width: 100%;
             max-width: 440px;
             border: 3.5px solid #f2bc1b;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(242, 188, 27, 0.2);
             text-align: center;
         }
 
         .title {
-            font-size: 22px;
-            font-weight: 900;
+            font-size: 24px;
+            font-weight: 800;
             color: #1a1a1a;
             letter-spacing: 0.5px;
             margin-bottom: 6px;
@@ -60,7 +55,7 @@
         }
 
         .subtitle {
-            font-size: 13px;
+            font-size: 13.5px;
             color: #666;
             margin-bottom: 25px;
             font-weight: 500;
@@ -74,7 +69,7 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 800;
             color: #333;
             text-transform: uppercase;
@@ -89,98 +84,89 @@
 
         .input-box i {
             position: absolute;
-            left: 15px;
-            color: #999;
-            font-size: 16px;
+            left: 14px;
+            color: #0088ff;
+            font-size: 18px;
+        }
+
+        .input-box i.fa-ticket {
+            color: #e69d00;
         }
 
         .input-box input {
             width: 100%;
-            padding: 13px 15px 13px 45px;
-            border: 1.5px solid #e8ecef;
+            padding: 14px 14px 14px 44px;
             border-radius: 10px;
-            font-size: 14px;
+            border: 1.5px solid #e0e6ed;
+            background: #f4f6f9;
+            color: #333;
+            font-size: 15px;
+            font-weight: 600;
             outline: none;
-            transition: all 0.3s;
-            background-color: #f8f9fa;
+            transition: all 0.25s ease;
         }
 
         .input-box input:focus {
-            border-color: #d32f2f;
-            background-color: #fff;
-            box-shadow: 0 0 8px rgba(211, 47, 47, 0.15);
-        }
-
-        /* Khung Cloudflare ẩn đi hoàn toàn để không hiện chữ Troubleshoot */
-        .turnstile-box {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        #cfWidget {
-            display: none; /* Mặc định ẩn, không hiện Troubleshoot gây xấu giao diện */
+            border-color: #f2bc1b;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(242, 188, 27, 0.2);
         }
 
         .btn-submit {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #d32f2f 0%, #9a0007 100%);
-            color: #ffffff;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
+            padding: 15px;
+            background: linear-gradient(180deg, #fce055 0%, #dfa006 100%);
+            border: 1px solid #c48c03;
+            border-radius: 12px;
+            color: #2b1b00;
+            font-size: 18px;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
-            margin-top: 5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(223, 160, 6, 0.4);
+            transition: all 0.2s ease;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .btn-submit:hover:not(:disabled) {
-            background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.6);
+        .btn-submit:hover {
+            background: linear-gradient(180deg, #fff083 0%, #eba907 100%);
+            transform: translateY(-1px);
         }
 
         .btn-submit:disabled {
-            background: #cccccc !important;
+            opacity: 0.7;
             cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
         }
 
         #message {
-            margin-top: 20px;
+            margin-top: 15px;
+            font-weight: 700;
             font-size: 14px;
-            font-weight: 600;
-            min-height: 22px;
-            word-break: break-word;
+            line-height: 1.4;
+            min-height: 20px;
         }
 
-        .success { color: #2e7d32; }
-        .error { color: #d32f2f; }
+        .success { color: #0f8a42; }
+        .error { color: #d93025; }
 
-        .footer-note {
+        .footer-text {
             margin-top: 25px;
-            font-size: 12px;
             color: rgba(255, 255, 255, 0.5);
-            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- LOGO 33WIN ĐÃ TRỞ LẠI -->
     <div class="logo-container">
-        <!-- Nếu bạn muốn đổi logo, chỉ cần thay URL trong thẻ src bên dưới -->
-        <img src="https://i.imgur.com/8QG3y4N.png" alt="33WIN Logo" class="logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/140x140/b80000/ffffff?text=33WIN';">
+        <img src="https://i.imgur.com/C38Sm5X.png" alt="33WIN Logo">
     </div>
 
     <div class="card-container">
@@ -190,8 +176,8 @@
         <div class="form-group">
             <label for="username">TÊN TÀI KHOẢN HỘI VIÊN:</label>
             <div class="input-box">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="username" placeholder="Nhập tên đăng nhập" autocomplete="off">
+                <i class="fa-solid fa-circle-user"></i>
+                <input type="text" id="username" placeholder="Nhập tên đăng nhập">
             </div>
         </div>
 
@@ -199,121 +185,68 @@
             <label for="giftcode">MÃ CODE ƯU ĐÃI:</label>
             <div class="input-box">
                 <i class="fa-solid fa-ticket"></i>
-                <input type="text" id="giftcode" placeholder="Nhập mã tại đây" autocomplete="off">
+                <input type="text" id="giftcode" placeholder="NHẬP MÃ TẠI ĐÂY" style="text-transform: uppercase;">
             </div>
         </div>
 
-        <!-- Khung Cloudflare Turnstile (Tự hiển thị khi bấm nút) -->
-        <div class="turnstile-box">
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAECO7ZX1HmP2Q6pT" data-callback="onTurnstileSuccess" id="cfWidget"></div>
-        </div>
-
-        <button type="button" class="btn-submit" id="submitBtn" onclick="prepareSubmit()">
+        <button class="btn-submit" id="submitBtn" onclick="submitCode()">
             <i class="fa-solid fa-gift"></i> NHẬN QUÀ
         </button>
 
         <div id="message"></div>
     </div>
 
-    <div class="footer-note">
+    <div class="footer-text">
         BẢN QUYỀN THUỘC 33WIN © 2026
     </div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGZWz-DEJ30iDaEP5jnnElAZ300XXu-84Z0eltHDCRPJa_Nfr1ikEX5SEJ2PYM_.../exec";
+        const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE";
 
-        let userValue = "";
-        let codeValue = "";
+        function submitCode() {
+            var user = document.getElementById("username").value.trim();
+            var code = document.getElementById("giftcode").value.trim();
+            var msg = document.getElementById("message");
+            var btn = document.getElementById("submitBtn");
 
-        // Hàm được gọi tự động sau khi Cloudflare xác minh xong
-        function onTurnstileSuccess(token) {
-            sendDataToGoogleScript(token);
-        }
-
-        function startCooldown(button, seconds) {
-            let count = seconds;
-            button.disabled = true;
-
-            const timer = setInterval(() => {
-                button.innerHTML = `<i class="fa-solid fa-clock"></i> Thử lại sau (${count}s)`;
-                count--;
-
-                if (count < 0) {
-                    clearInterval(timer);
-                    button.disabled = false;
-                    button.innerHTML = '<i class="fa-solid fa-gift"></i> NHẬN QUÀ';
-                }
-            }, 1000);
-        }
-
-        function prepareSubmit() {
-            const userInput = document.getElementById("username");
-            const giftInput = document.getElementById("giftcode");
-            const btn = document.getElementById("submitBtn");
-            const msg = document.getElementById("message");
-            const widget = document.getElementById('cfWidget');
-
-            userValue = userInput ? userInput.value.trim() : "";
-            codeValue = giftInput ? giftInput.value.trim() : "";
-
-            if (!userValue || !codeValue) {
+            if (user === "" || code === "") {
                 msg.className = "error";
                 msg.innerHTML = "⚠️ Vui lòng điền đầy đủ Tên tài khoản và Mã code!";
                 return;
             }
 
-            msg.className = "";
-            msg.innerHTML = "";
-
-            // Bật khung xác minh Cloudflare lên khi bấm nút
-            widget.style.display = 'block';
             btn.disabled = true;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ĐANG XỬ LÝ...';
-
-            // Nếu Cloudflare không yêu cầu tương tác thủ công, gửi luôn
-            const cfResponse = document.querySelector('[name="cf-turnstile-response"]');
-            if (cfResponse && cfResponse.value) {
-                sendDataToGoogleScript(cfResponse.value);
-            }
-        }
-
-        function sendDataToGoogleScript(token) {
-            const msg = document.getElementById("message");
-            const btn = document.getElementById("submitBtn");
+            msg.className = "";
+            msg.innerHTML = "";
 
             fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({ username: userValue, giftcode: codeValue, cfToken: token })
+                body: JSON.stringify({ username: user, giftcode: code })
             })
-            .then(res => {
-                if (!res.ok) throw new Error("Mạng hoặc Server gặp sự cố");
-                return res.json();
-            })
+            .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
                     msg.className = "success";
-                    msg.innerHTML = "🎉 " + data.message;
+                    msg.innerHTML = data.message;
                     document.getElementById("username").value = "";
                     document.getElementById("giftcode").value = "";
                 } else {
                     msg.className = "error";
-                    msg.innerHTML = "❌ " + data.message;
+                    msg.innerHTML = data.message;
                 }
             })
             .catch(error => {
-                console.error("Lỗi:", error);
                 msg.className = "error";
-                msg.innerHTML = "❌ Có lỗi kết nối hoặc hệ thống đang quá tải. Vui lòng thử lại!";
+                msg.innerHTML = "❌ Có lỗi kết nối, vui lòng thử lại!";
             })
             .finally(() => {
-                document.getElementById('cfWidget').style.display = 'none';
-                startCooldown(btn, 5);
-                if (typeof turnstile !== 'undefined') {
-                    turnstile.reset();
-                }
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-gift"></i> NHẬN QUÀ';
             });
         }
     </script>
+
 </body>
 </html>
