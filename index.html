@@ -3,79 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trình Nhập Code Chuyên Nghiệp</title>
-    <!-- Thư viện CodeMirror -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/xml/xml.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"></script>
-    
+    <title>Trang Nhập Giftcode</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1e1e1e;
-            color: #fff;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
-            max-width: 900px;
-            margin: auto;
         }
-        h2 { color: #61afef; }
-        .CodeMirror {
-            height: 250px;
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            text-align: center;
+            color: #fff;
+        }
+        .logo-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffcc00;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255,204,0,0.5);
+        }
+        .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #ddd;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
             font-size: 15px;
-            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
         }
-        button {
-            margin-top: 15px;
-            padding: 10px 25px;
-            background-color: #007acc;
-            color: white;
+        .form-group input:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 8px rgba(255,204,0,0.3);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #ff9900, #ff5500);
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 8px;
+            color: #fff;
             font-size: 16px;
             font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 85, 0, 0.4);
+            transition: 0.3s;
+            margin-top: 10px;
         }
-        button:hover { background-color: #005999; }
-        #output {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #ffffff;
-            color: #000;
-            border-radius: 6px;
-            min-height: 120px;
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 85, 0, 0.6);
         }
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 14px;
+            min-height: 20px;
+        }
+        .success { color: #00ff88; }
+        .error { color: #ff4d4d; }
     </style>
 </head>
 <body>
 
-    <h2>Trình Nhập Code Chuyên Nghiệp</h2>
-    <p>Nhập mã HTML / CSS / JS của bạn vào đây:</p>
-    
-    <textarea id="codeEditor"></textarea>
-    <button onclick="runCode()">Chạy Code</button>
+    <div class="container">
+        <div class="logo-title">NHẬP CODE NHẬN THƯỞNG</div>
 
-    <h3 style="margin-top:25px;">Kết quả hiển thị:</h3>
-    <div id="output"></div>
+        <div class="form-group">
+            <label for="username">Tên tài khoản / ID:</label>
+            <input type="text" id="username" placeholder="Nhập tên tài khoản của bạn...">
+        </div>
+
+        <div class="form-group">
+            <label for="giftcode">Mã Giftcode:</label>
+            <input type="text" id="giftcode" placeholder="Nhập mã code tại đây..." style="text-transform: uppercase;">
+        </div>
+
+        <button class="btn-submit" onclick="submitCode()">Xác Nhận Nhận Quà</button>
+
+        <div id="message"></div>
+    </div>
 
     <script>
-        // Khởi tạo trình soạn thảo CodeMirror
-        var editor = CodeMirror.fromTextArea(document.getElementById("codeEditor"), {
-            lineNumbers: true,       // Hiển thị số dòng
-            mode: "htmlmixed",       // Hỗ trợ HTML, CSS, JS
-            theme: "dracula",        // Giao diện Dracula đẹp mắt
-            tabSize: 2
-        });
+        function submitCode() {
+            var user = document.getElementById("username").value.trim();
+            var code = document.getElementById("giftcode").value.trim();
+            var msg = document.getElementById("message");
 
-        // Code mặc định khi mở trang
-        editor.setValue(`<h1 style="color: #007acc;">Xin chào!</h1>\n<p>Đây là trình nhập code chuyên nghiệp.</p>`);
+            if (user === "" || code === "") {
+                msg.className = "error";
+                msg.innerHTML = "⚠️ Vui lòng điền đầy đủ Tên tài khoản và Mã code!";
+                return;
+            }
 
-        function runCode() {
-            var code = editor.getValue();
-            document.getElementById("output").innerHTML = code;
+            // Giả lập kiểm tra mã code
+            msg.className = "success";
+            msg.innerHTML = "🎉 Nhận code thành công! Hệ thống đang xử lý...";
         }
     </script>
 
