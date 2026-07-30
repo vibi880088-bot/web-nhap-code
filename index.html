@@ -15,7 +15,6 @@
         }
 
         body {
-            /* Nền đỏ đô chuyển màu chuẩn 33WIN */
             background: radial-gradient(circle at center, #6b0909 0%, #3a0000 70%, #200000 100%);
             min-height: 100vh;
             display: flex;
@@ -25,7 +24,6 @@
             padding: 20px;
         }
 
-        /* Logo 33WIN phía trên */
         .logo-container {
             margin-bottom: 25px;
             text-align: center;
@@ -37,14 +35,12 @@
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
         }
 
-        /* Khung Form nhận quà kiểu 79KING */
         .card-container {
             background: #ffffff;
             border-radius: 20px;
             padding: 35px 30px 30px;
             width: 100%;
             max-width: 440px;
-            /* Viền vàng ánh kim bo góc đặc trưng */
             border: 3.5px solid #f2bc1b;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(242, 188, 27, 0.2);
             text-align: center;
@@ -123,7 +119,6 @@
             box-shadow: 0 0 0 3px rgba(242, 188, 27, 0.2);
         }
 
-        /* Nút nhận quà chuyển màu vàng kim 3D */
         .btn-submit {
             width: 100%;
             padding: 15px;
@@ -150,8 +145,9 @@
             box-shadow: 0 6px 16px rgba(223, 160, 6, 0.6);
         }
 
-        .btn-submit:active {
-            transform: translateY(1px);
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         #message {
@@ -176,12 +172,10 @@
 </head>
 <body>
 
-    <!-- Logo 33WIN -->
     <div class="logo-container">
         <img src="https://i.imgur.com/C38Sm5X.png" alt="33WIN Logo">
     </div>
 
-    <!-- Khung Nhập Code -->
     <div class="card-container">
         <div class="title">TRUNG TÂM QUÀ TẶNG</div>
         <div class="subtitle">Nhập thông tin hội viên để nhận quà</div>
@@ -202,7 +196,7 @@
             </div>
         </div>
 
-        <button class="btn-submit" onclick="submitCode()">
+        <button class="btn-submit" id="submitBtn" onclick="submitCode()">
             <i class="fa-solid fa-gift"></i> NHẬN QUÀ
         </button>
 
@@ -214,10 +208,14 @@
     </div>
 
     <script>
+        // DÁN URL GOOGLE APPS SCRIPT CỦA BẠN VÀO GIỮA 2 DẤU NGOẶC KÉP Ở DÒNG DƯỚI:
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGZWz-DEj30iDaEP5jNnEIAZ300XxU-84Z0eltHTDcRPJa_Nfr1ikEX5SEJ2PYM_wsbw/exec";
+
         function submitCode() {
             var user = document.getElementById("username").value.trim();
             var code = document.getElementById("giftcode").value.trim();
             var msg = document.getElementById("message");
+            var btn = document.getElementById("submitBtn");
 
             if (user === "" || code === "") {
                 msg.className = "error";
@@ -225,8 +223,36 @@
                 return;
             }
 
-            msg.className = "success";
-            msg.innerHTML = "🎉 Nhận code thành công! Hệ thống đang kiểm tra...";
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ĐANG XỬ LÝ...';
+            msg.className = "";
+            msg.innerHTML = "";
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: user,
+                    giftcode: code
+                })
+            })
+            .then(() => {
+                msg.className = "success";
+                msg.innerHTML = "🎉 Nhận code thành công! Hệ thống đang kiểm tra và xử lý phát thưởng.";
+                document.getElementById("username").value = "";
+                document.getElementById("giftcode").value = "";
+            })
+            .catch(error => {
+                msg.className = "error";
+                msg.innerHTML = "❌ Có lỗi xảy ra, vui lòng thử lại sau!";
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-gift"></i> NHẬN QUÀ';
+            });
         }
     </script>
 
