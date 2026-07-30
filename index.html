@@ -3,115 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Nhập Giftcode</title>
+    <title>33WIN - TRUNG TÂM QUÀ TẶNG</title>
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
+
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            /* Nền đỏ đô chuyển màu chuẩn 33WIN */
+            background: radial-gradient(circle at center, #6b0909 0%, #3a0000 70%, #200000 100%);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 30px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+
+        /* Logo 33WIN phía trên */
+        .logo-container {
+            margin-bottom: 25px;
             text-align: center;
-            color: #fff;
         }
-        .logo-title {
+
+        .logo-container img {
+            max-width: 240px;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+        }
+
+        /* Khung Form nhận quà kiểu 79KING */
+        .card-container {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 35px 30px 30px;
+            width: 100%;
+            max-width: 440px;
+            /* Viền vàng ánh kim bo góc đặc trưng */
+            border: 3.5px solid #f2bc1b;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(242, 188, 27, 0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        .title {
             font-size: 24px;
-            font-weight: bold;
-            color: #ffcc00;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
             text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255,204,0,0.5);
         }
+
+        .subtitle {
+            font-size: 13.5px;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             text-align: left;
         }
+
         .form-group label {
             display: block;
-            margin-bottom: 6px;
-            font-size: 14px;
-            color: #ddd;
+            margin-bottom: 8px;
+            font-size: 12.5px;
+            font-weight: 800;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .form-group input {
+
+        .input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 14px;
+            color: #0088ff;
+            font-size: 18px;
+        }
+
+        .input-box i.fa-ticket {
+            color: #e69d00;
+        }
+
+        .input-box input {
             width: 100%;
-            padding: 12px 15px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            background: rgba(0, 0, 0, 0.4);
-            color: #fff;
+            padding: 14px 14px 14px 44px;
+            border-radius: 10px;
+            border: 1.5px solid #e0e6ed;
+            background: #f4f6f9;
+            color: #333;
             font-size: 15px;
+            font-weight: 600;
             outline: none;
-            transition: 0.3s;
+            transition: all 0.25s ease;
         }
-        .form-group input:focus {
-            border-color: #ffcc00;
-            box-shadow: 0 0 8px rgba(255,204,0,0.3);
+
+        .input-box input::placeholder {
+            color: #9aa5b5;
+            font-weight: 500;
         }
+
+        .input-box input:focus {
+            border-color: #f2bc1b;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(242, 188, 27, 0.2);
+        }
+
+        /* Nút nhận quà chuyển màu vàng kim 3D */
         .btn-submit {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(90deg, #ff9900, #ff5500);
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
+            padding: 15px;
+            background: linear-gradient(180deg, #fce055 0%, #dfa006 100%);
+            border: 1px solid #c48c03;
+            border-radius: 12px;
+            color: #2b1b00;
+            font-size: 18px;
+            font-weight: 800;
             cursor: pointer;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(255, 85, 0, 0.4);
-            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(223, 160, 6, 0.4);
+            transition: all 0.2s ease;
             margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
+
         .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 85, 0, 0.6);
+            background: linear-gradient(180deg, #fff083 0%, #eba907 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(223, 160, 6, 0.6);
         }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
         #message {
             margin-top: 15px;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 14px;
             min-height: 20px;
         }
-        .success { color: #00ff88; }
-        .error { color: #ff4d4d; }
+
+        .success { color: #0f8a42; }
+        .error { color: #d93025; }
+
+        .footer-text {
+            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="logo-title">NHẬP CODE NHẬN THƯỞNG</div>
+    <!-- Logo 33WIN -->
+    <div class="logo-container">
+        <img src="https://i.imgur.com/C38Sm5X.png" alt="33WIN Logo">
+    </div>
+
+    <!-- Khung Nhập Code -->
+    <div class="card-container">
+        <div class="title">TRUNG TÂM QUÀ TẶNG</div>
+        <div class="subtitle">Nhập thông tin hội viên để nhận quà</div>
 
         <div class="form-group">
-            <label for="username">Tên tài khoản / ID:</label>
-            <input type="text" id="username" placeholder="Nhập tên tài khoản của bạn...">
+            <label for="username">TÊN TÀI KHOẢN HỘI VIÊN:</label>
+            <div class="input-box">
+                <i class="fa-solid fa-circle-user"></i>
+                <input type="text" id="username" placeholder="Nhập tên đăng nhập">
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="giftcode">Mã Giftcode:</label>
-            <input type="text" id="giftcode" placeholder="Nhập mã code tại đây..." style="text-transform: uppercase;">
+            <label for="giftcode">MÃ CODE ƯU ĐÃI:</label>
+            <div class="input-box">
+                <i class="fa-solid fa-ticket"></i>
+                <input type="text" id="giftcode" placeholder="NHẬP MÃ TẠI ĐÂY" style="text-transform: uppercase;">
+            </div>
         </div>
 
-        <button class="btn-submit" onclick="submitCode()">Xác Nhận Nhận Quà</button>
+        <button class="btn-submit" onclick="submitCode()">
+            <i class="fa-solid fa-gift"></i> NHẬN QUÀ
+        </button>
 
         <div id="message"></div>
+    </div>
+
+    <div class="footer-text">
+        BẢN QUYỀN THUỘC 33WIN © 2026
     </div>
 
     <script>
@@ -126,9 +225,8 @@
                 return;
             }
 
-            // Giả lập kiểm tra mã code
             msg.className = "success";
-            msg.innerHTML = "🎉 Nhận code thành công! Hệ thống đang xử lý...";
+            msg.innerHTML = "🎉 Nhận code thành công! Hệ thống đang kiểm tra...";
         }
     </script>
 
