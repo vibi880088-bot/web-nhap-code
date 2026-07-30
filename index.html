@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>33WIN - TRUNG TÂM QUÀ TẶNG</title>
-    <!-- FontAwesome Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -44,7 +43,6 @@
             border: 3.5px solid #f2bc1b;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(242, 188, 27, 0.2);
             text-align: center;
-            position: relative;
         }
 
         .title {
@@ -108,11 +106,6 @@
             transition: all 0.25s ease;
         }
 
-        .input-box input::placeholder {
-            color: #9aa5b5;
-            font-weight: 500;
-        }
-
         .input-box input:focus {
             border-color: #f2bc1b;
             background: #ffffff;
@@ -142,7 +135,6 @@
         .btn-submit:hover {
             background: linear-gradient(180deg, #fff083 0%, #eba907 100%);
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(223, 160, 6, 0.6);
         }
 
         .btn-submit:disabled {
@@ -154,6 +146,7 @@
             margin-top: 15px;
             font-weight: 700;
             font-size: 14px;
+            line-height: 1.4;
             min-height: 20px;
         }
 
@@ -208,7 +201,6 @@
     </div>
 
     <script>
-        // DÁN URL GOOGLE APPS SCRIPT CỦA BẠN VÀO GIỮA 2 DẤU NGOẶC KÉP Ở DÒNG DƯỚI:
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGZWz-DEj30iDaEP5jNnEIAZ300XxU-84Z0eltHTDcRPJa_Nfr1ikEX5SEJ2PYM_wsbw/exec";
 
         function submitCode() {
@@ -230,24 +222,24 @@
 
             fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username: user,
-                    giftcode: code
-                })
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ username: user, giftcode: code })
             })
-            .then(() => {
-                msg.className = "success";
-                msg.innerHTML = "🎉 Nhận code thành công! Hệ thống đang kiểm tra và xử lý phát thưởng.";
-                document.getElementById("username").value = "";
-                document.getElementById("giftcode").value = "";
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    msg.className = "success";
+                    msg.innerHTML = data.message;
+                    document.getElementById("username").value = "";
+                    document.getElementById("giftcode").value = "";
+                } else {
+                    msg.className = "error";
+                    msg.innerHTML = data.message;
+                }
             })
             .catch(error => {
                 msg.className = "error";
-                msg.innerHTML = "❌ Có lỗi xảy ra, vui lòng thử lại sau!";
+                msg.innerHTML = "❌ Có lỗi kết nối, vui lòng thử lại!";
             })
             .finally(() => {
                 btn.disabled = false;
