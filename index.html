@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình Nhập Code Chuyên Nghiệp</title>
+    <!-- Thư viện CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        h2 { color: #61afef; }
+        .CodeMirror {
+            height: 250px;
+            font-size: 15px;
+            border-radius: 6px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 25px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover { background-color: #005999; }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #000;
+            border-radius: 6px;
+            min-height: 120px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Trình Nhập Code Chuyên Nghiệp</h2>
+    <p>Nhập mã HTML / CSS / JS của bạn vào đây:</p>
+    
+    <textarea id="codeEditor"></textarea>
+    <button onclick="runCode()">Chạy Code</button>
+
+    <h3 style="margin-top:25px;">Kết quả hiển thị:</h3>
+    <div id="output"></div>
+
+    <script>
+        // Khởi tạo trình soạn thảo CodeMirror
+        var editor = CodeMirror.fromTextArea(document.getElementById("codeEditor"), {
+            lineNumbers: true,       // Hiển thị số dòng
+            mode: "htmlmixed",       // Hỗ trợ HTML, CSS, JS
+            theme: "dracula",        // Giao diện Dracula đẹp mắt
+            tabSize: 2
+        });
+
+        // Code mặc định khi mở trang
+        editor.setValue(`<h1 style="color: #007acc;">Xin chào!</h1>\n<p>Đây là trình nhập code chuyên nghiệp.</p>`);
+
+        function runCode() {
+            var code = editor.getValue();
+            document.getElementById("output").innerHTML = code;
+        }
+    </script>
+
+</body>
+</html>
