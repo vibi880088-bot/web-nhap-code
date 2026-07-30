@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>33WIN - TRUNG TÂM QUÀ TẶNG</title>
-    <!-- Thư viện Icon FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,7 +14,7 @@
         }
 
         body {
-            background: radial-gradient(circle at center, #7e0b0b 0%, #3a0000 70%, #200000 100%);
+            background: radial-gradient(circle at center, #6b0909 0%, #3a0000 70%, #200000 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -29,18 +28,16 @@
             text-align: center;
         }
 
-        /* Tùy chỉnh Logo Imgur mới bo góc tròn chuẩn đẹp */
         .logo-container img {
-            max-width: 150px;
+            max-width: 240px;
             height: auto;
-            border-radius: 20px;
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
         }
 
         .card-container {
             background: #ffffff;
             border-radius: 20px;
-            padding: 35px 30px;
+            padding: 35px 30px 30px;
             width: 100%;
             max-width: 440px;
             border: 3.5px solid #f2bc1b;
@@ -87,159 +84,132 @@
 
         .input-box i {
             position: absolute;
-            left: 15px;
-            color: #999;
-            font-size: 16px;
-            transition: color 0.3s;
+            left: 14px;
+            color: #0088ff;
+            font-size: 18px;
+        }
+
+        .input-box i.fa-ticket {
+            color: #e69d00;
         }
 
         .input-box input {
             width: 100%;
-            padding: 13px 15px 13px 45px;
-            border: 1.5px solid #e0e0e0;
+            padding: 14px 14px 14px 44px;
             border-radius: 10px;
-            font-size: 14.5px;
+            border: 1.5px solid #e0e6ed;
+            background: #f4f6f9;
+            color: #333;
+            font-size: 15px;
+            font-weight: 600;
             outline: none;
-            transition: all 0.3s;
-            background-color: #f9f9f9;
+            transition: all 0.25s ease;
         }
 
         .input-box input:focus {
-            border-color: #d32f2f;
-            background-color: #fff;
-            box-shadow: 0 0 8px rgba(211, 47, 47, 0.2);
-        }
-
-        .input-box input:focus + i, 
-        .input-box input:focus ~ i {
-            color: #d32f2f;
+            border-color: #f2bc1b;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(242, 188, 27, 0.2);
         }
 
         .btn-submit {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #d32f2f 0%, #9a0007 100%);
-            color: #ffffff;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
+            padding: 15px;
+            background: linear-gradient(180deg, #fce055 0%, #dfa006 100%);
+            border: 1px solid #c48c03;
+            border-radius: 12px;
+            color: #2b1b00;
+            font-size: 18px;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
-            margin-top: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(223, 160, 6, 0.4);
+            transition: all 0.2s ease;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .btn-submit:hover:not(:disabled) {
-            background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.6);
-        }
-
-        .btn-submit:active:not(:disabled) {
-            transform: translateY(0);
+        .btn-submit:hover {
+            background: linear-gradient(180deg, #fff083 0%, #eba907 100%);
+            transform: translateY(-1px);
         }
 
         .btn-submit:disabled {
-            background: #cccccc !important;
+            opacity: 0.7;
             cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
         }
 
         #message {
-            margin-top: 20px;
+            margin-top: 15px;
+            font-weight: 700;
             font-size: 14px;
-            font-weight: 600;
-            min-height: 22px;
-            word-break: break-word;
+            line-height: 1.4;
+            min-height: 20px;
         }
 
-        .success { color: #2e7d32; }
-        .error { color: #d32f2f; }
+        .success { color: #0f8a42; }
+        .error { color: #d93025; }
 
-        .footer-note {
+        .footer-text {
             margin-top: 25px;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- LOGO HÌNH ẢNH MỚI CỦA BẠN -->
     <div class="logo-container">
-        <img src="https://i.imgur.com/WdfTQd7.png" alt="33WIN Logo">
+        <img src="https://i.imgur.com/C38Sm5X.png" alt="33WIN Logo">
     </div>
 
     <div class="card-container">
-        <div class="title">NHẬN CODE ƯU ĐÃI</div>
-        <div class="subtitle">Vui lòng nhập chính xác Tên tài khoản & Mã code</div>
+        <div class="title">TRUNG TÂM QUÀ TẶNG</div>
+        <div class="subtitle">Nhập thông tin hội viên để nhận quà</div>
 
         <div class="form-group">
-            <label for="username">Tên tài khoản</label>
+            <label for="username">TÊN TÀI KHOẢN HỘI VIÊN:</label>
             <div class="input-box">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="username" placeholder="Nhập tên tài khoản game..." autocomplete="off">
+                <i class="fa-solid fa-circle-user"></i>
+                <input type="text" id="username" placeholder="Nhập tên đăng nhập">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="giftcode">Mã Giftcode</label>
+            <label for="giftcode">MÃ CODE ƯU ĐÃI:</label>
             <div class="input-box">
-                <i class="fa-solid fa-key"></i>
-                <input type="text" id="giftcode" placeholder="Nhập mã code nhận quà..." autocomplete="off">
+                <i class="fa-solid fa-ticket"></i>
+                <input type="text" id="giftcode" placeholder="NHẬP MÃ TẠI ĐÂY" style="text-transform: uppercase;">
             </div>
         </div>
 
-        <button type="button" class="btn-submit" id="submitBtn" onclick="submitCode()">
+        <button class="btn-submit" id="submitBtn" onclick="submitCode()">
             <i class="fa-solid fa-gift"></i> NHẬN QUÀ
         </button>
 
         <div id="message"></div>
     </div>
 
-    <div class="footer-note">
-        © 33WIN - Hệ thống phát quà tự động an toàn & bảo mật
+    <div class="footer-text">
+        BẢN QUYỀN THUỘC 33WIN © 2026
     </div>
 
     <script>
-        // URL Google Apps Script chuẩn của bạn đã được tích hợp
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGZWz-DEJ30iDaEP5jNnEIAZ300XxU-84Z0eltHTDcRPJa_Nfr1ikEX5SEJ2PYM_wsbw/exec";
-
-        function startCooldown(button, seconds) {
-            let count = seconds;
-            button.disabled = true;
-
-            const timer = setInterval(() => {
-                button.innerHTML = `<i class="fa-solid fa-clock"></i> Thử lại sau (${count}s)`;
-                count--;
-
-                if (count < 0) {
-                    clearInterval(timer);
-                    button.disabled = false;
-                    button.innerHTML = '<i class="fa-solid fa-gift"></i> NHẬN QUÀ';
-                }
-            }, 1000);
-        }
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGZWz-DEj30iDaEP5jNnEIAZ300XxU-84Z0eltHTDcRPJa_Nfr1ikEX5SEJ2PYM_wsbw/exec";
 
         function submitCode() {
-            const userInput = document.getElementById("username");
-            const giftInput = document.getElementById("giftcode");
-            const btn = document.getElementById("submitBtn");
-            const msg = document.getElementById("message");
+            var user = document.getElementById("username").value.trim();
+            var code = document.getElementById("giftcode").value.trim();
+            var msg = document.getElementById("message");
+            var btn = document.getElementById("submitBtn");
 
-            const user = userInput ? userInput.value.trim() : "";
-            const code = giftInput ? giftInput.value.trim() : "";
-
-            if (!user || !code) {
+            if (user === "" || code === "") {
                 msg.className = "error";
                 msg.innerHTML = "⚠️ Vui lòng điền đầy đủ Tên tài khoản và Mã code!";
                 return;
@@ -255,30 +225,28 @@
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({ username: user, giftcode: code })
             })
-            .then(res => {
-                if (!res.ok) throw new Error("Mạng hoặc Server gặp sự cố");
-                return res.json();
-            })
+            .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
                     msg.className = "success";
-                    msg.innerHTML = "🎉 " + data.message;
-                    userInput.value = "";
-                    giftInput.value = "";
+                    msg.innerHTML = data.message;
+                    document.getElementById("username").value = "";
+                    document.getElementById("giftcode").value = "";
                 } else {
                     msg.className = "error";
-                    msg.innerHTML = "❌ " + data.message;
+                    msg.innerHTML = data.message;
                 }
             })
             .catch(error => {
-                console.error("Lỗi:", error);
                 msg.className = "error";
-                msg.innerHTML = "❌ Có lỗi kết nối hoặc hệ thống đang quá tải. Vui lòng thử lại!";
+                msg.innerHTML = "❌ Có lỗi kết nối, vui lòng thử lại!";
             })
             .finally(() => {
-                startCooldown(btn, 5);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-gift"></i> NHẬN QUÀ';
             });
         }
     </script>
+
 </body>
 </html>
